@@ -18,8 +18,6 @@ import service.BookService;
 public class BookController {
 	
 	@Autowired
-	BookModel bookmodel;
-	@Autowired
 	BookService bookservice;
 	
 	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})

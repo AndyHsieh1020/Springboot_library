@@ -1,0 +1,79 @@
+package controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import model.UserModel;
+import service.UserService;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+@RestController
+public class UserController {
+	
+	@Autowired
+	UserModel usermodel;
+	@Autowired
+	UserService userservice;
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/addUser")
+	public String addUser(@RequestBody UserModel usermodel) {
+		LocalDateTime now = LocalDateTime.now();
+		usermodel.setlastloginTime(null);
+		usermodel.setregistrationTime(now);
+		usermodel.setpassWord(usermodel.getpassWord());
+		usermodel.setphoneNumber(usermodel.getphoneNumber());
+		usermodel.setuserName(usermodel.getuserName());
+		userservice.addUser(usermodel);
+		return "User added";
+	}
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/checkLogin")
+	public ResponseEntity<String> checklogin(HttpServletResponse response, @RequestBody String sessionId) {
+		String responseData = "";
+		if (sessionId!=null) {
+			System.out.println("already login");
+			responseData = "already login";
+            return ResponseEntity.ok(responseData);
+        } else {
+        	System.out.println("user not not login");
+        	responseData = "user not not login";
+        	return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(responseData);
+        }
+	}
+	
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/loginUser")
+	public Map<String, String> login(HttpServletRequest request, @RequestBody UserModel usermodel) {
+        Boolean login= userservice.loginUser(usermodel);
+        request.getSession().setAttribute(request.getSession().getId(), "login");
+        Map<String, String> response = new HashMap<>();
+        if(login) {
+        	System.out.println("user exist login");
+            response.put("sessionId", request.getSession().getId());
+        	return response;
+        }
+        else
+        {
+        	System.out.println("user not exist or pwd wrong");
+        	response.put("sessionId", "");
+        	return response;
+        }  
+		
+	}
+}
