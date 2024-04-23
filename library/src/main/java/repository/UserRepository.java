@@ -51,7 +51,7 @@ public class UserRepository {
 	    
 	    public UserModel mapRow(ResultSet rs, int rowNum) throws SQLException {
 	        UserModel user = new UserModel();
-	        user.setpassWord(rs.getString("Password"));
+	        user.setPassWord(rs.getString("Password"));
 	        user.setsalt(rs.getString("Salt"));
 	        // 还可以设置其他属性...
 	        return user;
@@ -66,15 +66,15 @@ public class UserRepository {
 		System.out.println("EXCUTE INSERT USER");
 		int saltLength = 16;
 		String salt = generateSalt(saltLength);
-		String hashed_password = sha256(usermodel.getpassWord()+salt);
+		String hashed_password = sha256(usermodel.getPassWord()+salt);
 		jdbctemplate.update("INSERT INTO User(Phone_number, Password, User_name, Registration_time, Last_login_time, Salt)"+"VALUES(?,?,?,?,?,?)"
-		,usermodel.getphoneNumber(),hashed_password,usermodel.getuserName(),usermodel.getregistrationTime(),usermodel.getlastloginTime(),salt);
+		,usermodel.getPhoneNumber(),hashed_password,usermodel.getUserName(),usermodel.getRegistrationTime(),usermodel.getLastLoginTime(),salt);
 	}
 	
 	public boolean loginUser(UserModel usermodel) {
 		System.out.println("EXCUTE LOGIN USER");
-		UserModel user = jdbctemplate.queryForObject("SELECT Password, Salt FROM User WHERE User_name=?", new UserModelRowMapper(),usermodel.getuserName());
-		if (user.getpassWord().equals(sha256(usermodel.getpassWord()+user.getsalt())))
+		UserModel user = jdbctemplate.queryForObject("SELECT Password, Salt FROM User WHERE User_name=?", new UserModelRowMapper(),usermodel.getUserName());
+		if (user.getPassWord().equals(sha256(usermodel.getPassWord()+user.getsalt())))
 		{
 			return true;
 		}

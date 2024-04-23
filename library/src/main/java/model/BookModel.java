@@ -10,7 +10,7 @@ public class BookModel {
 	private String name;
 	private String author;
 	private String introduction;
-	private String imgurl;
+	private String imgUrl;
 	
 	public int getId() {
 		return id;
@@ -19,37 +19,37 @@ public class BookModel {
 		this.id = id;
 	}
 	
-	public String getname() {
+	public String getName() {
 		return name;
 	}
-	public void setname(String passWord) {
+	public void setName(String passWord) {
 		this.name = passWord;
 	}
 	
-	public String getisbn() {
+	public String getIsbn() {
 		return isbn;
 	}
-	public void setisbn(String isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 	
-	public String getauthor() {
+	public String getAuthor() {
 		return author;
 	}
-	public void setauthor(String author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 	
-	public String getintroduction() {
+	public String getIntroduction() {
 		return introduction;
 	}
-	public void setintroduction(String introduction) {
+	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
-	public String getimgurl() {
-		return imgurl;
+	public String getImgUrl() {
+		return imgUrl;
 	}
-	public void setimgurl(String imgurl) {
-		this.imgurl = imgurl;
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 }

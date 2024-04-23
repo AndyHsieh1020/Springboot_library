@@ -19,8 +19,8 @@ public class BookService {
 	public void editBook(BookModel bookmodel) {
 		bookrepository.editBook(bookmodel);
 	}
-	public void deleteBook(BookModel bookmodel) {
-		bookrepository.deleteBook(bookmodel);
+	public void deleteBook(String isbn) {
+		bookrepository.deleteBook(isbn);
 	}
 	public List<Map<String,Object>> listAllbooks() {
 		return bookrepository.loadAllbooks();

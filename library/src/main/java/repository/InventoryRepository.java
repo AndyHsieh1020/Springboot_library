@@ -18,7 +18,7 @@ public class InventoryRepository {
 	public void addBook(InventoryModel bookmodel) {
 		System.out.println("EXCUTE INSERT Inventory");
 		jdbctemplate.update("INSERT INTO Inventory(ISBN, Store_time, Status)"+"VALUES(?,?,'在庫')"
-		,bookmodel.getisbn(),bookmodel.getstoretime());
+		,bookmodel.getIsbn(),bookmodel.getStoreTime());
 	}
 	
 	public List<Map<String, Object>> loadAllbooks() {
@@ -29,12 +29,12 @@ public class InventoryRepository {
 	public void editBook(InventoryModel bookmodel) {
 		System.out.println("EDIT Inventory");
 		jdbctemplate.update("UPDATE Inventory SET ISBN = ?, Store_time = ?, Status = ? WHERE Inventory_id = ?"
-				,bookmodel.getisbn(),bookmodel.getstoretime(),bookmodel.getstatus(),bookmodel.getinventoryid());
+				,bookmodel.getIsbn(),bookmodel.getStoreTime(),bookmodel.getStatus(),bookmodel.getInventoryId());
 	}
 	
-	public void deleteBook(InventoryModel bookmodel) {
+	public void deleteBook(int id) {
 		System.out.println("DELETE Inventory");
-		jdbctemplate.update("DELETE FROM Inventory WHERE Inventory_id = ?",bookmodel.getinventoryid());
+		jdbctemplate.update("DELETE FROM Inventory WHERE Inventory_id = ?", id);
 	}
 
 

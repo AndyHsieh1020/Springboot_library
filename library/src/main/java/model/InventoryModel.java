@@ -5,36 +5,36 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class InventoryModel {
-	private int inventoryid;
+	private int inventoryId;
 	private String isbn;
-	private LocalDateTime store_time;
+	private LocalDateTime storeTime;
 	private String status;
 	
-	public int getinventoryid() {
-		return inventoryid;
+	public int getInventoryId() {
+		return inventoryId;
 	}
-	public void setinventoryid(int inventoryid) {
-		this.inventoryid = inventoryid;
+	public void setInventoryId(int inventoryId) {
+		this.inventoryId = inventoryId;
 	}
 	
-	public String getisbn() {
+	public String getIsbn() {
 		return isbn;
 	}
-	public void setisbn(String isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
 	
-	public LocalDateTime getstoretime() {
-		return store_time;
+	public LocalDateTime getStoreTime() {
+		return storeTime;
 	}
-	public void setstoretime(LocalDateTime store_time) {
-		this.store_time = store_time;
+	public void setStoreTime(LocalDateTime storeTime) {
+		this.storeTime = storeTime;
 	}
 	
-	public String getstatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setstatus(String status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 

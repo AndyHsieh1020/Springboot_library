@@ -1,0 +1,57 @@
+package controller;
+
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import model.BookModel;
+import service.BookService;
+
+@RestController
+public class BookController {
+	
+	@Autowired
+	BookService bookservice;
+	
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/addBook")
+	public String addBook(@RequestBody BookModel bookmodel) {
+		bookmodel.setisbn(bookmodel.getisbn());
+		bookmodel.setname(bookmodel.getname());
+		bookmodel.setintroduction(bookmodel.getintroduction());
+		bookmodel.setauthor(bookmodel.getauthor());
+		bookmodel.setimgurl(bookmodel.getimgurl());
+		bookservice.addBook(bookmodel);
+		return "Book added";
+	}
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/editBook")
+	public String editBook(@RequestBody BookModel bookmodel) {
+		bookmodel.setisbn(bookmodel.getisbn());
+		bookmodel.setname(bookmodel.getname());
+		bookmodel.setintroduction(bookmodel.getintroduction());
+		bookmodel.setauthor(bookmodel.getauthor());
+		bookmodel.setimgurl(bookmodel.getimgurl());
+		bookservice.editBook(bookmodel);
+		return "Book edited";
+	}
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@PostMapping("/deleteBook")
+	public String deleteBook(@RequestBody BookModel bookmodel) {
+		bookmodel.setisbn(bookmodel.getisbn());
+		bookservice.deleteBook(bookmodel);
+		return "Book deleted";
+	}
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/listBook")
+	public List<Map<String,Object>> listBook() {
+		return bookservice.listAllbooks();
+	}
+}

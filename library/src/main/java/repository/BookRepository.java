@@ -16,7 +16,7 @@ public class BookRepository {
 	public void addBook(BookModel bookmodel) {
 		System.out.println("EXCUTE INSERT BOOK");
 		jdbctemplate.update("INSERT INTO Book(ISBN, Name, Author, Introduction, ImgUrl)"+"VALUES(?,?,?,?,?)"
-		,bookmodel.getisbn(),bookmodel.getname(),bookmodel.getauthor(),bookmodel.getintroduction(),bookmodel.getimgurl());
+		,bookmodel.getIsbn(),bookmodel.getName(),bookmodel.getAuthor(),bookmodel.getIntroduction(),bookmodel.getImgUrl());
 	}
 	
 	public List<Map<String, Object>> loadAllbooks() {
@@ -27,12 +27,12 @@ public class BookRepository {
 	public void editBook(BookModel bookmodel) {
 		System.out.println("EDIT BOOK");
 		jdbctemplate.update("UPDATE Book SET Name = ?, Author = ?, Introduction = ?, ImgUrl = ?  WHERE ISBN = ?"
-				,bookmodel.getname(),bookmodel.getauthor(),bookmodel.getintroduction(),bookmodel.getimgurl(),bookmodel.getisbn());
+				,bookmodel.getName(),bookmodel.getAuthor(),bookmodel.getIntroduction(),bookmodel.getImgUrl(),bookmodel.getIsbn());
 	}
 	
-	public void deleteBook(BookModel bookmodel) {
+	public void deleteBook(String isbn) {
 		System.out.println("DELETE BOOK");
-		jdbctemplate.update("DELETE FROM Book WHERE ISBN = ?",bookmodel.getisbn());
+		jdbctemplate.update("DELETE FROM Book WHERE ISBN = ?", isbn);
 	}
 
 }

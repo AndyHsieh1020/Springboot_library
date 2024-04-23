@@ -10,7 +10,7 @@ public class UserModel {
 	private String passWord;
 	private String userName;
 	private LocalDateTime registrationTime;
-	private LocalDateTime lastloginTime;
+	private LocalDateTime lastLoginTime;
 	private String Salt;
 	
 	public int getId() {
@@ -20,39 +20,39 @@ public class UserModel {
 		this.id = id;
 	}
 	
-	public String getpassWord() {
+	public String getPassWord() {
 		return passWord;
 	}
-	public void setpassWord(String passWord) {
+	public void setPassWord(String passWord) {
 		this.passWord = passWord;
 	}
 	
-	public String getuserName() {
+	public String getUserName() {
 		return userName;
 	}
-	public void setuserName(String userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 	
-	public String getphoneNumber() {
+	public String getPhoneNumber() {
 		return phoneNumber;
 	}
-	public void setphoneNumber(String phoneNumber) {
+	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
 	
-	public LocalDateTime getregistrationTime() {
+	public LocalDateTime getRegistrationTime() {
 		return registrationTime;
 	}
-	public void setregistrationTime(LocalDateTime registrationTime) {
+	public void setRegistrationTime(LocalDateTime registrationTime) {
 		this.registrationTime = registrationTime;
 	}
 	
-	public LocalDateTime getlastloginTime() {
-		return lastloginTime;
+	public LocalDateTime getLastLoginTime() {
+		return lastLoginTime;
 	}
-	public void setlastloginTime(LocalDateTime lastloginTime) {
-		this.lastloginTime = lastloginTime;
+	public void setLastLoginTime(LocalDateTime lastloginTime) {
+		this.lastLoginTime = lastloginTime;
 	}
 	
 	public String getsalt() {

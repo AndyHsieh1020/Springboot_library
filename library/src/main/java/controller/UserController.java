@@ -33,15 +33,12 @@ public class UserController {
 	@Autowired
 	UserService userservice;
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
-	@PostMapping("/addUser")
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST})
+	@PostMapping("/user")
 	public String addUser(@RequestBody UserModel usermodel) {
 		LocalDateTime now = LocalDateTime.now();
-		usermodel.setlastloginTime(null);
-		usermodel.setregistrationTime(now);
-		usermodel.setpassWord(usermodel.getpassWord());
-		usermodel.setphoneNumber(usermodel.getphoneNumber());
-		usermodel.setuserName(usermodel.getuserName());
+		usermodel.setLastLoginTime(null);
+		usermodel.setRegistrationTime(now);
 		userservice.addUser(usermodel);
 		return "User added";
 	}
@@ -49,7 +46,7 @@ public class UserController {
 	@Autowired
     private StringRedisTemplate stringRedisTemplate;
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST})
 	@PostMapping("/checkLogin")
 	public ResponseEntity<String> checklogin(HttpServletResponse response, @RequestBody String sessionId) {
 		String sessionIdValue = "";
@@ -74,7 +71,7 @@ public class UserController {
 	}
 	
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST})
 	@PostMapping("/loginUser")
 	public Map<String, String> login(HttpServletRequest request, @RequestBody UserModel usermodel) {
         Boolean login= userservice.loginUser(usermodel);
@@ -83,6 +80,9 @@ public class UserController {
         if(login) {
         	System.out.println("user exist login");
             response.put("sessionId", request.getSession().getId());
+            //LocalDateTime now = LocalDateTime.now();
+            //usermodel.setRegistrationTime(now);
+            //userservice.addUser(usermodel);
         	return response;
         }
         else
@@ -95,7 +95,7 @@ public class UserController {
 	}
 	
 	
-	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+	@CrossOrigin(origins = "*", allowedHeaders = "*", methods = {RequestMethod.POST})
 	@PostMapping("/logoutUser")
 	public ResponseEntity<String> logout(HttpServletResponse response, @RequestBody String sessionId) {
 		String sessionIdValue = "";
